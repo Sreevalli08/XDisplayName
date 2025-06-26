@@ -5,28 +5,22 @@ function XDisplayName(){
     const [firstName, setFirstName] = useState(""); // stores first name input
     const [lastName, setlastName] = useState(""); // stores last name input
     const [fullName, setFullName] = useState(""); // stores full name 
-    const [error, setError] = useState(false); // shows error
   
 
     // Handle form submission
 const handleSubmit = (e) => {
     e.preventDefault(); // prevent page reload.
-    console.log("form submission prevented")
+    
 
     // checks if both fields are filled.
     if(!firstName || !lastName){
-        setError(true); // show error 
+       
         return;
     }
-
-    setError(false); // clear error on valid submission
-
 
     // set and display full name
     setFullName(`${firstName} ${lastName}`);
 
-    setFirstName(""); // clear first name input
-    setlastName(""); // clear last name input
 };
 
     return (
@@ -43,16 +37,12 @@ const handleSubmit = (e) => {
         {/* input need to be connected to state using value & onChange */}
 
         <input type = "text"
+        name="firstName"
         value = {firstName}
         onChange = {(e) => setFirstName(e.target.value)} //update state
-        name="firstName"
+        required //Enables native browser validation popup
         />
 
-         {/* Show error if first name is empty */}
-          {error && !firstName && (
-            <p>Please fill out this field.</p>
-          )}
-        
         </div>
 
         <div> 
@@ -60,15 +50,12 @@ const handleSubmit = (e) => {
 
             {/* Input need to be connected to state using value & onChange */}
             <input type = "text" 
+             name="lastName"
              value = {lastName}
              onChange = {(e) => setlastName(e.target.value)} // update state
-            name="lastName"
+             required
 
             />
-
-            {/* Show error if last name is empty */}
-            {error && !lastName && (<p> Please fill out this field.</p>)}
-
         </div>
     
         <button type="submit">Submit</button>
